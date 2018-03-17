@@ -89,6 +89,50 @@ public class File_staistics {
         return lineCount;
     }
 
+     public void lineLimit(String fp)
+    {
+        int wordcount1 = 0;
+        int characterCount1 = 0;
+        FileInputStream fileStream = null;
+        try {
+            fileStream = new FileInputStream(fp);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String fileContent="";
+        try {
+            File f = new File(fp);
+            FileInputStream inp = new FileInputStream(f);
+            byte[] bf = new byte[(int)f.length()];
+            inp.read(bf);
+            fileContent = new String(bf, "UTF-8");
+
+            fileContent = fileContent.replace("\n", " ").replace("\r", " ");
+
+            StringTokenizer tok = new StringTokenizer(fileContent, " ");
+            StringBuilder output = new StringBuilder(fileContent.length());
+            int lineLen = 0;
+            while (tok.hasMoreTokens()) {
+                String word = tok.nextToken();
+
+                if (lineLen + word.length() > 80) {
+                    output.append("\n");
+                    lineLen = 0;
+                }
+                output.append(word + " ");
+                lineLen += word.length();
+            }
+            outputstring = output.toString();
+            //System.out.print(outputstring);
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     //Returns the average word count in file
     public int avgWordsperLine(String fp)
