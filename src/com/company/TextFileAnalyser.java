@@ -88,9 +88,11 @@ public class TextFileAnalyser {
             }
         });
 
+
         JButton btnRunProgram = new JButton("Run Program");
         btnRunProgram.setBounds(326, 136, 117, 29);
         desktopPane.add(btnRunProgram);
+        
         
 
             private void readTheFile() {
@@ -138,6 +140,39 @@ public class TextFileAnalyser {
         JButton btnSaveFile = new JButton("Save File");
         btnSaveFile.setBounds(326, 164, 117, 29);
         desktopPane.add(btnSaveFile);
+    
+        btnSaveFile.addActionListener(arg0 -> {
+            FileNameExtensionFilter filter2 = new FileNameExtensionFilter("TXT Document", "txt");
+            JFileChooser jfc2 = new JFileChooser();
+            jfc2.setFileFilter(filter2);
+            int rval2 = jfc2.showSaveDialog(null);
+            if (rval2 == JFileChooser.APPROVE_OPTION) {
+                try {
+                    FileWriter fw = new FileWriter(jfc2.getSelectedFile()+ ".txt");
+
+                    String write = "";
+//                    if(justified == true)
+                        write = File_staistics.outputstring;
+//                    else
+//                        write = File_staistics.outputstring.format(File_staistics.outputstring,"%s");
+                    fw.write(write);
+
+
+                    fw.close();
+
+                }
+                catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+                file2 = jfc2.getSelectedFile();
+                filepath = file2.getAbsolutePath();
+                System.out.println(filepath);
+
+            }
+        });
+
+
         
 
 
