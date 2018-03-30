@@ -10,18 +10,20 @@ public class File_statistics {
     static int characterCount;
     static int avgWordsperLine;
     static int avgLineLength;
-    static int characterMax;
+    static int characterMax ;
+    static int space_count;
+    static int lineremoved=0;
     static ArrayList<String> outputstring;
     static ArrayList<String> outputstringfull;
 
-    File_statistics(String filepath){
+    File_statistics(String filepath,boolean fj){
 
         wordCount(filepath);
-        lineCount(filepath);
+//        lineCount(filepath);
         avgWordsperLine(filepath);
         avgLineLength(filepath);
         lineLimit(filepath,characterMax);
-        fullJustify(characterMax);
+        fullJustify(characterMax,fj);
     }
 
     //Returns the word count in file
@@ -29,6 +31,9 @@ public class File_statistics {
     {
         int wordcount1 = 0;
         int characterCount1 = 0;
+        int linerem = 0;
+        int linecount1 = 0;
+
         FileInputStream fileStream = null;
         try {
             fileStream = new FileInputStream(fp);
@@ -50,13 +55,22 @@ public class File_statistics {
                     String[] wordList = line.split("\\s+");     // \\s+ is the space delimiter in java
                     wordcount1 += wordList.length;
                 }
+                else
+                {
+                    linerem++;
+                }
+                linecount1++;
+
             }
-            //System.out.println();
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
         characterCount = characterCount1;
         wordCount = wordcount1;
+        lineremoved = linerem;
+        lineCount = linecount1;
         return wordCount;
     }
 
@@ -86,8 +100,8 @@ public class File_statistics {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        lineCount = linecount1;
-        return lineCount;
+
+        return linecount1;
     }
 
 
@@ -136,10 +150,13 @@ public class File_statistics {
         }
     }
 
-    public void fullJustify(int maxWidth) {
+    public void fullJustify(int maxWidth,boolean fj) {
 
         String[] words;
         List<String> result = new ArrayList<String>();
+
+        System.out.println(characterMax);
+
 
         for (String ignored : words = outputstring.toArray(new String[0])) {
         }
@@ -151,9 +168,13 @@ public class File_statistics {
 
         int count=0;
         int last=0;
+        int spcount = 0;
         ArrayList<String> list = new ArrayList<String>();
         for(int i=0; i<words.length; i++){
             count = count + words[i].length();
+
+            //System.out.println(words[i]  );
+
 
             if(count+i-last>maxWidth){
                 int wordsLen = count-words[i].length();
@@ -185,8 +206,27 @@ public class File_statistics {
 
                 sb.append(words[i-1]);//last words in the line
                 //if only one word in this line, need to fill left with space
-                while(sb.length()<maxWidth){
-                    sb.append(" ");
+                if(fj) {
+                    int rand = 1;
+
+                    for (int j = 0; j < sb.length() && (sb.length() < maxWidth-1); j++) {
+                        if (sb.charAt(j) == ' ') {
+                            if (rand == 1) {
+                                sb.insert(j, " ");
+                                spcount++;
+                                j = j + 2;
+                                // sb = sb[j]) + " " + sb.substring(j, sb.length());
+                            } else
+                                rand = 0;
+                        }
+
+
+                    }
+                }
+                else {
+                    while (sb.length() < maxWidth) {
+                        sb.append(" ");
+                    }
                 }
 
                 result.add(sb.toString());
@@ -195,6 +235,7 @@ public class File_statistics {
                 count=words[i].length();
             }
         }
+
 
         int lastLen = 0;
         StringBuilder sb = new StringBuilder();
@@ -205,15 +246,21 @@ public class File_statistics {
         }
 
         sb.append(words[words.length-1]);
-        int d=0;
+
         while(sb.length()<maxWidth){
             sb.append(" ");
         }
         result.add(sb.toString());
 
-        //System.out.println(result);
+//        for(int i =0; i<result.size();i++){
+//            System.out.println(result.get(i));
+//        }
+        space_count = spcount;
         outputstringfull = (ArrayList<String>) result;
+
     }
+
+
 
     //Returns the average word count in file
     public int avgWordsperLine(String fp)

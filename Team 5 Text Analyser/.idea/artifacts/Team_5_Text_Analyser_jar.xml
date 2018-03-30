@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Team 5 Text Analyser:jar">
+    <output-path>$USER_HOME$/Desktop</output-path>
+    <root id="archive" name="Team 5 Text Analyser.jar">
+      <element id="module-output" name="Team 5 Text Analyser" />
+    </root>
+  </artifact>
+</component>

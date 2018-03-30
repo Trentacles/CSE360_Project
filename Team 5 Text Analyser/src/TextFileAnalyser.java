@@ -7,12 +7,17 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+
+
+
 public class TextFileAnalyser {
+
+    private JLabel lblNewLabel_2;
+    private JLabel lblNewLabel_3;
     private JLabel lblNewLabel_4;
     private JLabel lblNewLabel_5;
     private JLabel lblNewLabel_6;
     private JLabel lblNewLabel_7;
-    private JLabel lblNewLabel_3;
     private JLabel lblNewLabel_8;
     private JTextField textField;
 
@@ -75,7 +80,12 @@ public class TextFileAnalyser {
         JComboBox characterMaxBox = new JComboBox(listofMaxchar);
         characterMaxBox.setBounds(360, 105, 80, 26);
         characterMaxBox.setSelectedIndex(60);
+        File_statistics.characterMax = 80;
         desktopPane.add(characterMaxBox);
+        characterMaxBox.addActionListener(arg0 -> {
+            File_statistics.characterMax = (int) characterMaxBox.getSelectedItem();
+
+        });
 
 
         JRadioButton rdbtnLeftJustified = new JRadioButton("Left Justified");
@@ -163,7 +173,14 @@ public class TextFileAnalyser {
             private void readTheFile() {
                 if (file1 != null) {
                     String fp = file1.getPath();
-                    File_statistics o1 = new File_statistics(fp);
+                    File_statistics o1 = new File_statistics(fp,fulljustified);
+
+                    String Numberofspaces = Integer.toString(File_statistics.space_count);
+                    lblNewLabel_3.setText(Numberofspaces);
+
+                    String Numberoflinesremoved = Integer.toString(File_statistics.lineremoved);
+                    lblNewLabel_2.setText(Numberoflinesremoved);
+
                     String Wordsprocessed = Integer.toString(File_statistics.wordCount);
                     lblNewLabel_4.setText(Wordsprocessed);
 
@@ -179,6 +196,9 @@ public class TextFileAnalyser {
             }
         });
 
+        lblNewLabel_2 = new JLabel("0");
+        lblNewLabel_2.setBounds(232, 198, 61, 16);
+        desktopPane.add(lblNewLabel_2);
 
         lblNewLabel_3 = new JLabel("0");
         lblNewLabel_3.setBounds(232, 57, 61, 16);
@@ -202,9 +222,9 @@ public class TextFileAnalyser {
         lblNewLabel_7.setBounds(232, 169, 61, 16);
         desktopPane.add(lblNewLabel_7);
 
-        lblNewLabel_8 = new JLabel("0");
-        lblNewLabel_8.setBounds(232, 198, 61, 16);
-        desktopPane.add(lblNewLabel_8);
+//        lblNewLabel_8 = new JLabel("0");
+//        lblNewLabel_8.setBounds(232, 198, 61, 16);
+//        desktopPane.add(lblNewLabel_8);
 
         JButton btnSaveFile = new JButton("Save File");
         btnSaveFile.setBounds(450, 200, 117, 29);
@@ -220,19 +240,19 @@ public class TextFileAnalyser {
 
                     ArrayList <String> write = File_statistics.outputstring;
                     ArrayList <String> writefull = File_statistics.outputstringfull;
-                    String f = "%0$80s";
+                    String f = "%0$"+Integer.toString(File_statistics.characterMax)+"s";
                     for (int i = 0; i < write.size(); i++) {
-                        if (justified == true && space == true)
+                        if(justified == false && space == true && fulljustified == true)
+                            fw.write(String.format(writefull.get(i) + "\n"));
+                        else if(justified == false && space == false && fulljustified == true)
+                            fw.write(String.format(writefull.get(i) + "\n\n"));
+                        else if (justified == true && space == true)
                             fw.write(write.get(i) + "\n");
                         else if(justified == true && space == false)
                             fw.write(write.get(i) + "\n\n");
                         else if(justified == false && space == true)
                             fw.write(String.format(f, write.get(i) + "\n"));
                         else if(justified == false && space == false)
-                            fw.write(String.format(f, write.get(i) + "\n\n"));
-                        else if(justified == false && space == true && fulljustified == true)
-                            fw.write(String.format(f, writefull.get(i) + "\n"));
-                        else if(justified == false && space == false && fulljustified == false)
                             fw.write(String.format(f, write.get(i) + "\n\n"));
                     }
 
@@ -262,11 +282,11 @@ public class TextFileAnalyser {
         lblNewLabel_1.setBounds(6, 169, 167, 16);
         desktopPane.add(lblNewLabel_1);
 
-        JLabel lblNewLabel_3 = new JLabel("Number of Spaces Added: ");
-        lblNewLabel_3.setBounds(6, 197, 167, 16);
+        JLabel lblNewLabel_3 = new JLabel("Number of Blank lines removed: ");
+        lblNewLabel_3.setBounds(6, 197, 237, 16);
         desktopPane.add(lblNewLabel_3);
 
-        JLabel lblNewLabel_2 = new JLabel("Number Of Blank Lines Removed: ");
+        JLabel lblNewLabel_2 = new JLabel("Number Of Spaces Added: ");
         lblNewLabel_2.setBounds(6, 57, 237, 16);
         desktopPane.add(lblNewLabel_2);
 
