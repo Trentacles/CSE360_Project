@@ -109,10 +109,12 @@ public class TextFileAnalyser {
 
         rdbtnLeftJustified.addActionListener(arg0 -> {
             justified = true;
+            fulljustified = false;
         });
 
         rdbtnRightJustified.addActionListener(arg0 -> {
             justified = false;
+            fulljustified = false;
         });
 
         rdbtnFullJustified.addActionListener(arg0 -> {
@@ -173,7 +175,7 @@ public class TextFileAnalyser {
             private void readTheFile() {
                 if (file1 != null) {
                     String fp = file1.getPath();
-                    File_statistics o1 = new File_statistics(fp,fulljustified);
+                    File_statistics o1 = new File_statistics(fp);
 
                     String Numberofspaces = Integer.toString(File_statistics.space_count);
                     lblNewLabel_3.setText(Numberofspaces);
@@ -241,19 +243,28 @@ public class TextFileAnalyser {
                     ArrayList <String> write = File_statistics.outputstring;
                     ArrayList <String> writefull = File_statistics.outputstringfull;
                     String f = "%0$"+Integer.toString(File_statistics.characterMax)+"s";
-                    for (int i = 0; i < write.size(); i++) {
-                        if(justified == false && space == true && fulljustified == true)
-                            fw.write(String.format(writefull.get(i) + "\n"));
-                        else if(justified == false && space == false && fulljustified == true)
-                            fw.write(String.format(writefull.get(i) + "\n\n"));
-                        else if (justified == true && space == true)
-                            fw.write(write.get(i) + "\n");
-                        else if(justified == true && space == false)
-                            fw.write(write.get(i) + "\n\n");
-                        else if(justified == false && space == true)
-                            fw.write(String.format(f, write.get(i) + "\n"));
-                        else if(justified == false && space == false)
-                            fw.write(String.format(f, write.get(i) + "\n\n"));
+
+                    if(fulljustified == true){
+
+                        for (int j =0; j < writefull.size();j++){
+                            if(space == true)
+                                fw.write(String.format(writefull.get(j) + "\n"));
+                            else if(space == false)
+                                fw.write(String.format(writefull.get(j) + "\n\n"));
+                        }
+                    }
+                    else {
+                        for (int i = 0; i < write.size(); i++) {
+
+                            if (justified == true && space == true)
+                                fw.write(write.get(i) + "\n");
+                            else if (justified == true && space == false)
+                                fw.write(write.get(i) + "\n\n");
+                            else if (justified == false && space == true)
+                                fw.write(String.format(f, write.get(i) + "\n"));
+                            else if (justified == false && space == false)
+                                fw.write(String.format(f, write.get(i) + "\n\n"));
+                        }
                     }
 
                     fw.close();

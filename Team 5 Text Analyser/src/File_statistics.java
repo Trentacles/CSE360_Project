@@ -16,14 +16,13 @@ public class File_statistics {
     static ArrayList<String> outputstring;
     static ArrayList<String> outputstringfull;
 
-    File_statistics(String filepath,boolean fj){
+    File_statistics(String filepath){
 
         wordCount(filepath);
-//        lineCount(filepath);
         avgWordsperLine(filepath);
         avgLineLength(filepath);
         lineLimit(filepath,characterMax);
-        fullJustify(characterMax,fj);
+        fullJustify(characterMax);
     }
 
     //Returns the word count in file
@@ -150,12 +149,10 @@ public class File_statistics {
         }
     }
 
-    public void fullJustify(int maxWidth,boolean fj) {
+    public void fullJustify(int maxWidth) {
 
         String[] words;
         List<String> result = new ArrayList<String>();
-
-        System.out.println(characterMax);
 
 
         for (String ignored : words = outputstring.toArray(new String[0])) {
@@ -206,7 +203,6 @@ public class File_statistics {
 
                 sb.append(words[i-1]);//last words in the line
                 //if only one word in this line, need to fill left with space
-                if(fj) {
                     int rand = 1;
 
                     for (int j = 0; j < sb.length() && (sb.length() < maxWidth-1); j++) {
@@ -222,12 +218,7 @@ public class File_statistics {
 
 
                     }
-                }
-                else {
-                    while (sb.length() < maxWidth) {
-                        sb.append(" ");
-                    }
-                }
+
 
                 result.add(sb.toString());
 
