@@ -211,13 +211,134 @@ public class File_statistics {
                                 sb.insert(j, " ");
                                 spcount++;
                                 j = j + 2;
-                                // sb = sb[j]) + " " + sb.substring(j, sb.length());
                             } else
                                 rand = 0;
                         }
-
-
                     }
+
+                for (int j = 0; j < sb.length() && (sb.length() < maxWidth-1); j++) {
+                    if (sb.charAt(j) == ' ' && sb.charAt(j+1) == ' ') {
+                        if (rand == 1) {
+                            sb.insert(j, " ");
+                            spcount++;
+                            j = j + 2;
+                        } else
+                            rand = 0;
+                    }
+                }
+
+                for (int j = 0; j < sb.length() && (sb.length() < maxWidth-1); j++) {
+                    if (sb.charAt(j) == ' ' && sb.charAt(j+1) == ' ' && sb.charAt(j+2) == ' ') {
+                        if (rand == 1) {
+                            sb.insert(j, " ");
+                            spcount++;
+                            j = j + 2;
+                        } else
+                            rand = 0;
+                    }
+                }
+
+                for (int j = 0; j < sb.length() && (sb.length() < maxWidth-1); j++) {
+                    if (sb.charAt(j) == ' ' && sb.charAt(j+1) == ' ' && sb.charAt(j+2) == ' ' && sb.charAt(j+3) == ' ' ) {
+                        if (rand == 1) {
+                            sb.insert(j, " ");
+                            spcount++;
+                            j = j + 2;
+                        } else
+                            rand = 0;
+                    }
+                }
+
+                for (int j = 0; j < sb.length() && (sb.length() < maxWidth-1); j++) {
+                    if (sb.charAt(j) == ' ' && sb.charAt(j+1) == ' ' && sb.charAt(j+2) == ' ' && sb.charAt(j+3) == ' '
+                            && sb.charAt(j+4) == ' ') {
+                        if (rand == 1) {
+                            sb.insert(j, " ");
+                            spcount++;
+                            j = j + 2;
+                        } else
+                            rand = 0;
+                    }
+                }
+
+                for (int j = 0; j < sb.length() && (sb.length() < maxWidth-1); j++) {
+                    if (sb.charAt(j) == ' ' && sb.charAt(j+1) == ' ' && sb.charAt(j+2) == ' '
+                            && sb.charAt(j+3) == ' ' && sb.charAt(j+4) == ' ' && sb.charAt(j+5) == ' ') {
+                        if (rand == 1) {
+                            sb.insert(j, " ");
+                            spcount++;
+                            j = j + 2;
+                        } else
+                            rand = 0;
+                    }
+                }
+
+                for (int j = 0; j < sb.length() && (sb.length() < maxWidth-1); j++) {
+                    if (sb.charAt(j) == ' ' && sb.charAt(j+1) == ' ' && sb.charAt(j+2) == ' '
+                            && sb.charAt(j+3) == ' ' && sb.charAt(j+4) == ' ' && sb.charAt(j+5) == ' '
+                            && sb.charAt(j+6) == ' ') {
+                        if (rand == 1) {
+                            sb.insert(j, " ");
+                            spcount++;
+                            j = j + 2;
+                        } else
+                            rand = 0;
+                    }
+                }
+
+                for (int j = 0; j < sb.length() && (sb.length() < maxWidth-1); j++) {
+                    if (sb.charAt(j) == ' ' && sb.charAt(j+1) == ' ' && sb.charAt(j+2) == ' '
+                            && sb.charAt(j+3) == ' ' && sb.charAt(j+4) == ' ' && sb.charAt(j+5) == ' '
+                            && sb.charAt(j+6) == ' ' && sb.charAt(j+7) == ' ') {
+                        if (rand == 1) {
+                            sb.insert(j, " ");
+                            spcount++;
+                            j = j + 2;
+                        } else
+                            rand = 0;
+                    }
+                }
+
+                for (int j = 0; j < sb.length() && (sb.length() < maxWidth-1); j++) {
+                    if (sb.charAt(j) == ' ' && sb.charAt(j+1) == ' ' && sb.charAt(j+2) == ' '
+                            && sb.charAt(j+3) == ' ' && sb.charAt(j+4) == ' ' && sb.charAt(j+5) == ' '
+                            && sb.charAt(j+6) == ' ' && sb.charAt(j+7) == ' ' && sb.charAt(j+8) == ' ' ) {
+                        if (rand == 1) {
+                            sb.insert(j, " ");
+                            spcount++;
+                            j = j + 2;
+                        } else
+                            rand = 0;
+                    }
+                }
+
+                for (int j = 0; j < sb.length() && (sb.length() < maxWidth-1); j++) {
+                    if (sb.charAt(j) == ' ' && sb.charAt(j+1) == ' ' && sb.charAt(j+2) == ' '
+                            && sb.charAt(j+3) == ' ' && sb.charAt(j+4) == ' ' && sb.charAt(j+5) == ' '
+                            && sb.charAt(j+6) == ' ' && sb.charAt(j+7) == ' ' && sb.charAt(j+8) == ' '
+                            && sb.charAt(j+9) == ' ') {
+                        if (rand == 1) {
+                            sb.insert(j, " ");
+                            spcount++;
+                            j = j + 2;
+                        } else
+                            rand = 0;
+                    }
+                }
+
+                for (int j = 0; j < sb.length() && (sb.length() < maxWidth-1); j++) {
+                    if (sb.charAt(j) == ' ' && sb.charAt(j+1) == ' ' && sb.charAt(j+2) == ' '
+                            && sb.charAt(j+3) == ' ' && sb.charAt(j+4) == ' ' && sb.charAt(j+5) == ' '
+                            && sb.charAt(j+6) == ' ' && sb.charAt(j+7) == ' ' && sb.charAt(j+8) == ' '
+                            && sb.charAt(j+9) == ' ' && sb.charAt(j+10) == ' ') {
+                        if (rand == 1) {
+                            sb.insert(j, " ");
+                            spcount++;
+                            j = j + 2;
+                        } else
+                            rand = 0;
+                    }
+                }
 
 
                 result.add(sb.toString());
