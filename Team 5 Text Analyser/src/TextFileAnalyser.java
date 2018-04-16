@@ -323,6 +323,7 @@ public class TextFileAnalyser {
         lblMaximumOf.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         lblMaximumOf.setBounds(70, 245, 420, 16);
         desktopPane.add(lblMaximumOf);
+        //commit
     }
 
 }
