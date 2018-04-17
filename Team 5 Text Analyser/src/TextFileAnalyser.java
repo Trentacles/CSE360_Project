@@ -189,8 +189,14 @@ public class TextFileAnalyser {
                     String AverageWordsperLine = Integer.toString(File_statistics.avgWordsperLine);
                     lblNewLabel_5.setText(AverageWordsperLine);
 
-                    String AverageLineLength = Integer.toString(File_statistics.avgLineLength);
-                    lblNewLabel_6.setText(AverageLineLength);
+                    if(rdbtnFullJustified.isSelected()){
+                        String AverageLineLength = Integer.toString(File_statistics.characterMax);
+                        lblNewLabel_6.setText(AverageLineLength);
+                    }
+                    else {
+                        String AverageLineLength = Integer.toString(File_statistics.avgLineLength);
+                        lblNewLabel_6.setText(AverageLineLength);
+                    }
 
                     String NumberofLines = Integer.toString(File_statistics.lineCount);
                     lblNewLabel_7.setText(NumberofLines);

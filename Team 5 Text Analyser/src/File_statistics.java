@@ -18,91 +18,9 @@ public class File_statistics {
 
     File_statistics(String filepath){
 
-        wordCount(filepath);
-        avgWordsperLine(filepath);
-        avgLineLength(filepath);
         lineLimit(filepath,characterMax);
-        fullJustify(characterMax);
+        fullJustify(characterMax,filepath);
     }
-
-    //Returns the word count in file
-    public int wordCount(String fp)
-    {
-        int wordcount1 = 0;
-        int characterCount1 = 0;
-        int linerem = 0;
-        int linecount1 = 0;
-
-        FileInputStream fileStream = null;
-        try {
-            fileStream = new FileInputStream(fp);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        InputStreamReader input = new InputStreamReader(fileStream);
-        BufferedReader reader = new BufferedReader(input);
-
-        try {
-            while((line = reader.readLine()) != null)
-            {
-                if(!(line.equals("")))
-                {
-
-                    characterCount1 += line.length();
-
-                    String[] wordList = line.split("\\s+");     // \\s+ is the space delimiter in java
-                    wordcount1 += wordList.length;
-                }
-                else
-                {
-                    linerem++;
-                }
-                linecount1++;
-
-            }
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        characterCount = characterCount1;
-        wordCount = wordcount1;
-        lineremoved = linerem;
-        lineCount = linecount1;
-        return wordCount;
-    }
-
-
-    public int lineCount(String fp)
-    {
-        int linecount1 = 0;
-        FileInputStream fileStream = null;
-        try {
-            fileStream = new FileInputStream(fp);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        InputStreamReader input = new InputStreamReader(fileStream);
-        BufferedReader reader = new BufferedReader(input);
-
-        try {
-            while((line = reader.readLine()) != null)
-            {
-                if(!(line.equals("")))
-                {
-
-                    linecount1++;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return linecount1;
-    }
-
 
     public void lineLimit(String fp, int maxWidth)
     {
@@ -112,7 +30,7 @@ public class File_statistics {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
+        int linecount1 =1;
         String fileContent;
         try {
             File f = new File(fp);
@@ -134,7 +52,10 @@ public class File_statistics {
                 }
 
                 if (i == tokens.length - 1)
+                {
                     linesList.add(line.trim());
+
+                }
             }
 
 
@@ -149,7 +70,9 @@ public class File_statistics {
         }
     }
 
-    public void fullJustify(int maxWidth) {
+
+
+    public void fullJustify(int maxWidth, String fp) {
 
         String[] words;
         List<String> result = new ArrayList<String>();
@@ -203,18 +126,18 @@ public class File_statistics {
 
                 sb.append(words[i-1]);//last words in the line
                 //if only one word in this line, need to fill left with space
-                    int rand = 1;
+                int rand = 1;
 
-                    for (int j = 0; j < sb.length() && (sb.length() < maxWidth-1); j++) {
-                        if (sb.charAt(j) == ' ') {
-                            if (rand == 1) {
-                                sb.insert(j, " ");
-                                spcount++;
-                                j = j + 2;
-                            } else
-                                rand = 0;
-                        }
+                for (int j = 0; j < sb.length() && (sb.length() < maxWidth-1); j++) {
+                    if (sb.charAt(j) == ' ') {
+                        if (rand == 1) {
+                            sb.insert(j, " ");
+                            spcount++;
+                            j = j + 2;
+                        } else
+                            rand = 0;
                     }
+                }
 
                 for (int j = 0; j < sb.length() && (sb.length() < maxWidth-1); j++) {
                     if (sb.charAt(j) == ' ' && sb.charAt(j+1) == ' ') {
@@ -370,27 +293,49 @@ public class File_statistics {
         space_count = spcount;
         outputstringfull = (ArrayList<String>) result;
 
+
+        int wordcount1 = 0;
+        int characterCount1 = 0;
+        int linerem = 0;
+
+        FileInputStream fileStream = null;
+        try {
+            fileStream = new FileInputStream(fp);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        InputStreamReader input = new InputStreamReader(fileStream);
+        BufferedReader reader = new BufferedReader(input);
+
+        try {
+            while((line = reader.readLine()) != null)
+            {
+                if(!(line.equals("")))
+                {
+                    characterCount1 += line.length();
+                    String[] wordList = line.split("\\s+");     // \\s+ is the space delimiter in java
+                    wordcount1 += wordList.length;
+                }
+                else
+                {
+                    linerem++;
+                }
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        characterCount = characterCount1;
+        wordCount = wordcount1;
+        lineremoved = linerem;
+
+        int l = outputstring.size();
+        lineCount = l;
+        avgWordsperLine = wordcount1/l;
+        avgLineLength = characterCount1/l;
+
     }
-
-
-
-    //Returns the average word count in file
-    public int avgWordsperLine(String fp)
-    {
-        int wc = wordCount(fp);
-        int l = lineCount(fp);
-
-        avgWordsperLine = wc/l;
-        return avgWordsperLine;
-    }
-
-    public int avgLineLength(String fp){
-        int cc = characterCount;
-        int l = lineCount(fp);
-
-        avgLineLength = cc/l;
-        return avgLineLength;
-    }
-
 
 }
